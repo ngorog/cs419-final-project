@@ -3,6 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import { Button, Icon, Menu } from "semantic-ui-react";
 import NavBar from "./NavBar";
 import ChampionPage from "./ChampionPage";
+import Champion from "./Champion";
 import Home from "./Home";
 
 class App extends React.Component {
@@ -19,10 +20,9 @@ class App extends React.Component {
 				<Switch>
 					<Route
 						path='/champion/:id'
-						render={props => (
-							<ChampionPage {...props} id={props.match.params.id} />
-						)}
+						render={props => <Champion {...props} id={props.match.params.id} />}
 					/>
+
 					<Route exact path='/champion'>
 						<ChampionPage />
 					</Route>
