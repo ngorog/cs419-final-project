@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Header } from "semantic-ui-react";
 
 class Champion extends React.Component {

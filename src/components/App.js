@@ -2,9 +2,10 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { Button, Icon, Menu } from "semantic-ui-react";
 import NavBar from "./NavBar";
-import ChampionPage from "./ChampionPage";
+import ChampionsPage from "./ChampionsPage";
 import Champion from "./Champion";
 import Home from "./Home";
+import User from "./User";
 
 class App extends React.Component {
 	state = {};
@@ -24,8 +25,14 @@ class App extends React.Component {
 					/>
 
 					<Route exact path='/champion'>
-						<ChampionPage />
+						<ChampionsPage />
 					</Route>
+
+					<Route
+						exact
+						path='/search/:user'
+						render={props => <User {...props} id={props.match.params.id} />}
+					/>
 
 					<Route exact path='/'>
 						<Home />
