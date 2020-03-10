@@ -49,7 +49,7 @@ class User extends React.Component {
 
 	componentDidMount() {
 		//	let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
-		let api_key = "RGAPI-66aec707-4a5b-42e6-97a3-2dfa5d25f8cb";
+		let api_key = "RGAPI-6be68049-6ef5-494d-9661-6e794aea7415";
 		let username = this.props.match.params.user;
 
 		this.doCORSRequest(
@@ -117,7 +117,8 @@ class User extends React.Component {
 				{this.state.status === 200 ? (
 					<Grid>
 						<Grid.Row>
-							<Grid.Column width='4'>
+							<Grid.Column width='1'></Grid.Column>
+							<Grid.Column width='2'>
 								<Card>
 									<Image
 										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
