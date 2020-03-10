@@ -1,6 +1,6 @@
 import React from "react";
 import { Header, Grid, Icon } from "semantic-ui-react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/SearchBar";
 import { withRouter } from "react-router-dom";
 
 class Home extends React.Component {

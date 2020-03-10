@@ -1,8 +1,7 @@
 import React from "react";
-import Rank from "./Rank.js";
+import Rank from "../components/Rank.js";
 import { Grid, Loader, Dimmer, Header, Image, Card } from "semantic-ui-react";
-import UserInfo from "./userInfo";
-import RankData from "./rankData";
+import MostPlayed from "../components/MostPlayed";
 
 class User extends React.Component {
 	state = { matchData: [], loaded: false };
@@ -37,6 +36,10 @@ class User extends React.Component {
 		this.setState({ matchHistoryData: result });
 	};
 
+	setMostPlayed = result => {
+		this.setState({ mostPlayed: result });
+	};
+
 	setMatchData = result => {
 		this.setState({
 			matchData: this.state.matchData.concat(result)
@@ -45,7 +48,8 @@ class User extends React.Component {
 	};
 
 	componentDidMount() {
-		let api_key = "RGAPI-c8cc45c3-3e41-49b0-b1f4-91e097b9d035";
+		//	let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
+		let api_key = "RGAPI-66aec707-4a5b-42e6-97a3-2dfa5d25f8cb";
 		let username = this.props.match.params.user;
 
 		this.doCORSRequest(
@@ -69,6 +73,15 @@ class User extends React.Component {
 					);
 				}
 			})
+			.then(() =>
+				this.doCORSRequest(
+					{
+						method: "GET",
+						url: `https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.userInfo.id}?api_key=${api_key}`
+					},
+					this.setMostPlayed
+				)
+			)
 			.then(() =>
 				this.doCORSRequest(
 					{
@@ -102,27 +115,35 @@ class User extends React.Component {
 		return this.state.loaded ? (
 			<div>
 				{this.state.status === 200 ? (
-					<Grid centered>
-						<Grid.Column width='12'>
-							<Card>
-								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
-									wrapped
-									ui={false}
-								/>
-								<Card.Content>
-									<Card.Header>{this.state.userInfo.name}</Card.Header>
-									<Card.Meta>
-										<span className='date'>
-											Level {this.state.userInfo.summonerLevel}
-										</span>
-									</Card.Meta>
-								</Card.Content>
-								<Card.Content extra>
-									<Rank rankData={this.state.rankData} />
-								</Card.Content>
-							</Card>
-						</Grid.Column>
+					<Grid>
+						<Grid.Row>
+							<Grid.Column width='4'>
+								<Card>
+									<Image
+										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
+										wrapped
+										ui={false}
+									/>
+									<Card.Content>
+										<Card.Header>{this.state.userInfo.name}</Card.Header>
+										<Card.Meta>
+											<span className='date'>
+												Level {this.state.userInfo.summonerLevel}
+											</span>
+										</Card.Meta>
+									</Card.Content>
+									<Card.Content extra>
+										<Rank rankData={this.state.rankData} />
+									</Card.Content>
+								</Card>
+							</Grid.Column>
+							<Grid.Column width='10'>
+								<Header as='h1' textAlign='center'>
+									Match History
+								</Header>
+							</Grid.Column>
+						</Grid.Row>
+						<MostPlayed mostPlayed={this.state.mostPlayed} />
 					</Grid>
 				) : (
 					<Grid centered>

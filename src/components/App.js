@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { Button, Icon, Menu } from "semantic-ui-react";
 import NavBar from "./NavBar";
-import ChampionsPage from "./ChampionsPage";
-import Champion from "./Champion";
-import Home from "./Home";
-import User from "./User";
+import Champions from "../pages/Champions";
+import Champion from "../pages/Champion";
+import Home from "../pages/Home";
+import User from "../pages/User";
 
 class App extends React.Component {
 	state = {};
@@ -25,7 +25,7 @@ class App extends React.Component {
 					/>
 
 					<Route exact path='/champion'>
-						<ChampionsPage />
+						<Champions />
 					</Route>
 
 					<Route

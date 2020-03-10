@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Loader, Dimmer, Header, Image, Card } from "semantic-ui-react";
-import RankedIcons from "./RankedIcons";
+import RankedIcons from "../data/RankedIcons";
 
 class User extends React.Component {
 	state = { matchData: [], loaded: false };

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { Header, Card, Grid, Loader, Dimmer } from "semantic-ui-react";
 import axios from "axios";
-import ChampionCard from "./ChampionCard";
+import ChampionCard from "../components/ChampionCard";
 
 class ChampionsPage extends React.Component {
 	state = { champions: [], loaded: false };
@@ -16,6 +16,7 @@ class ChampionsPage extends React.Component {
 				const champions = res.data.data;
 				this.setState({ champions });
 				this.setState({ loaded: true });
+				console.log(this.state.champions);
 			});
 	}
 
