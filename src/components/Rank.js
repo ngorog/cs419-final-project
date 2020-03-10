@@ -11,8 +11,6 @@ class User extends React.Component {
 
 	componentDidMount() {
 		this.setRankData(this.props.rankData);
-		console.log("HERE");
-		console.log(this.props.rankData);
 	}
 
 	parseRank = rank => {
@@ -34,7 +32,6 @@ class User extends React.Component {
 						{this.state.rankData.wins} Wins - {this.state.rankData.losses}{" "}
 						Losses
 					</p>
-					{console.log(RankedIcons)}
 					<Image
 						src={RankedIcons[this.state.rankData.tier].src}
 						wrapped

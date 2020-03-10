@@ -1,6 +1,8 @@
 import React from "react";
 import Rank from "./Rank.js";
-import { Grid, Loader, Dimmer, Image, Card } from "semantic-ui-react";
+import { Grid, Loader, Dimmer, Header, Image, Card } from "semantic-ui-react";
+import UserInfo from "./userInfo";
+import RankData from "./rankData";
 
 class User extends React.Component {
 	state = { matchData: [], loaded: false };
@@ -13,9 +15,11 @@ class User extends React.Component {
 				if (typeof setResult === "function") {
 					setResult(JSON.parse(x.responseText));
 				}
+				this.setState({ status: x.status });
 				resolve(x);
 				return;
 			};
+			this.setState({ status: x.status });
 			x.open(options.method, cors_api_url + options.url);
 			x.send();
 		});
@@ -41,7 +45,7 @@ class User extends React.Component {
 	};
 
 	componentDidMount() {
-		let api_key = "RGAPI-a5a4b404-8b98-401e-852c-8ea02bc5fa0d";
+		let api_key = "RGAPI-c8cc45c3-3e41-49b0-b1f4-91e097b9d035";
 		let username = this.props.match.params.user;
 
 		this.doCORSRequest(
@@ -51,15 +55,20 @@ class User extends React.Component {
 			},
 			this.setUserInfo
 		)
-			.then(() =>
-				this.doCORSRequest(
-					{
-						method: "GET",
-						url: `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.userInfo.id}?api_key=${api_key}`
-					},
-					this.setRankData
-				)
-			)
+			.then(() => {
+				if (this.state.status === 404) {
+					this.setState({ loaded: true });
+					return Promise.reject("User does not exist");
+				} else {
+					this.doCORSRequest(
+						{
+							method: "GET",
+							url: `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.userInfo.id}?api_key=${api_key}`
+						},
+						this.setRankData
+					);
+				}
+			})
 			.then(() =>
 				this.doCORSRequest(
 					{
@@ -69,10 +78,9 @@ class User extends React.Component {
 					this.setMatchHistoryData
 				)
 			)
-
 			.then(() => {
 				var i;
-				for (i = 0; i < 10; i++) {
+				for (i = 0; i < 1; i++) {
 					this.doCORSRequest(
 						{
 							method: "GET",
@@ -93,37 +101,39 @@ class User extends React.Component {
 	render() {
 		return this.state.loaded ? (
 			<div>
-				{console.log(this.state.userInfo)}
-				{console.log(this.state.rankData)}
-				{console.log(this.state.matchHistoryData)}
-				{console.log(this.state.matchData)}
-
-				<Grid centered>
-					<Grid.Column width='12'>
-						<Card>
-							<Image
-								src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
-								wrapped
-								ui={false}
-							/>
-							<Card.Content>
-								<Card.Header>{this.state.userInfo.name}</Card.Header>
-								<Card.Meta>
-									<span className='date'>
-										Level {this.state.userInfo.summonerLevel}
-									</span>
-								</Card.Meta>
-							</Card.Content>
-							<Card.Content extra>
-								<Rank rankData={this.state.rankData} />
-							</Card.Content>
-						</Card>
-					</Grid.Column>
-				</Grid>
+				{this.state.status === 200 ? (
+					<Grid centered>
+						<Grid.Column width='12'>
+							<Card>
+								<Image
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
+									wrapped
+									ui={false}
+								/>
+								<Card.Content>
+									<Card.Header>{this.state.userInfo.name}</Card.Header>
+									<Card.Meta>
+										<span className='date'>
+											Level {this.state.userInfo.summonerLevel}
+										</span>
+									</Card.Meta>
+								</Card.Content>
+								<Card.Content extra>
+									<Rank rankData={this.state.rankData} />
+								</Card.Content>
+							</Card>
+						</Grid.Column>
+					</Grid>
+				) : (
+					<Grid centered>
+						<Header as='h1' textAlign='center'>
+							Username not found. Try again.
+						</Header>
+					</Grid>
+				)}
 			</div>
 		) : (
 			<Dimmer active>
-				{console.log(this.state.champions)}
 				<Loader />
 			</Dimmer>
 		);
