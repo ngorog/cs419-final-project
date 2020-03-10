@@ -39,7 +39,7 @@ class User extends React.Component {
 	};
 
 	componentDidMount() {
-		let api_key = "RGAPI-f6c4d9e9-d5e2-4151-bdca-116d9ecbd861";
+		let api_key = "RGAPI-a5a4b404-8b98-401e-852c-8ea02bc5fa0d";
 		let username = this.props.match.params.user;
 		this.doCORSRequest(
 			{
