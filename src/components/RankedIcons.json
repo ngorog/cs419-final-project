@@ -1,0 +1,29 @@
+{
+	"IRON": {
+		"src": "../ranked-icons/Iron.png"
+	},
+	"BRONZE": {
+		"src": "../ranked-icons/Bronze.png"
+	},
+	"SILVER": {
+		"src": "../ranked-icons/Silver.png"
+	},
+	"GOLD": {
+		"src": "../ranked-icons/Gold.png"
+	},
+	"PLATINUM": {
+		"src": "../ranked-icons/Platinum.png"
+	},
+	"DIAMOND": {
+		"src": "../ranked-icons/Diamond.png"
+	},
+	"MASTER": {
+		"src": "../ranked-icons/Master.png"
+	},
+	"GRANDMASTER": {
+		"src": "../ranked-icons/Grandmaster.png"
+	},
+	"CHALLENGER": {
+		"src": "../ranked-icons/Challenger.png"
+	}
+}

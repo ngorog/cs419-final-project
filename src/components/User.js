@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Grid, Loader, Dimmer } from "semantic-ui-react";
-import axios from "axios";
-import API from "../api";
+import Rank from "./Rank.js";
+import { Grid, Loader, Dimmer, Image, Card } from "semantic-ui-react";
 
 class User extends React.Component {
 	state = { matchData: [], loaded: false };
@@ -15,7 +13,6 @@ class User extends React.Component {
 				if (typeof setResult === "function") {
 					setResult(JSON.parse(x.responseText));
 				}
-				this.setState({ loaded: true });
 				resolve(x);
 				return;
 			};
@@ -28,6 +25,10 @@ class User extends React.Component {
 		this.setState({ userInfo: result });
 	};
 
+	setRankData = result => {
+		this.setState({ rankData: result[0] });
+	};
+
 	setMatchHistoryData = result => {
 		this.setState({ matchHistoryData: result });
 	};
@@ -36,11 +37,13 @@ class User extends React.Component {
 		this.setState({
 			matchData: this.state.matchData.concat(result)
 		});
+		this.setState({ loaded: true });
 	};
 
 	componentDidMount() {
 		let api_key = "RGAPI-a5a4b404-8b98-401e-852c-8ea02bc5fa0d";
 		let username = this.props.match.params.user;
+
 		this.doCORSRequest(
 			{
 				method: "GET",
@@ -52,11 +55,21 @@ class User extends React.Component {
 				this.doCORSRequest(
 					{
 						method: "GET",
+						url: `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.userInfo.id}?api_key=${api_key}`
+					},
+					this.setRankData
+				)
+			)
+			.then(() =>
+				this.doCORSRequest(
+					{
+						method: "GET",
 						url: `https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.userInfo.accountId}?api_key=${api_key}`
 					},
 					this.setMatchHistoryData
 				)
 			)
+
 			.then(() => {
 				var i;
 				for (i = 0; i < 10; i++) {
@@ -71,15 +84,41 @@ class User extends React.Component {
 			});
 	}
 
+	parseRank = rank => {
+		let newRank = rank.toLowerCase();
+		newRank = newRank[0].toUpperCase() + newRank.slice(1);
+		return newRank;
+	};
+
 	render() {
 		return this.state.loaded ? (
 			<div>
 				{console.log(this.state.userInfo)}
+				{console.log(this.state.rankData)}
 				{console.log(this.state.matchHistoryData)}
 				{console.log(this.state.matchData)}
 
 				<Grid centered>
-					<Grid.Column width='12'>{this.props.username}</Grid.Column>
+					<Grid.Column width='12'>
+						<Card>
+							<Image
+								src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
+								wrapped
+								ui={false}
+							/>
+							<Card.Content>
+								<Card.Header>{this.state.userInfo.name}</Card.Header>
+								<Card.Meta>
+									<span className='date'>
+										Level {this.state.userInfo.summonerLevel}
+									</span>
+								</Card.Meta>
+							</Card.Content>
+							<Card.Content extra>
+								<Rank rankData={this.state.rankData} />
+							</Card.Content>
+						</Card>
+					</Grid.Column>
 				</Grid>
 			</div>
 		) : (
