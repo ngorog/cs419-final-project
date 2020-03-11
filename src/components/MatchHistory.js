@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Grid, Loader, Dimmer, Header, Image, Divider, Table } from "semantic-ui-react";
+import { Grid, Loader, Dimmer, Header, Image, Divider } from "semantic-ui-react";
 import axios from "axios";
 
 import "./MatchHistory.css";
@@ -52,7 +52,7 @@ class MatchHistory extends React.Component {
 				this.props.matchData.participantIdentities[i].player.summonerName ===
 				this.props.userName
 			) {
-				console.log("Name: ", i, this.state.championList[i]);
+				// console.log("Name: ", i, this.state.championList[i]);
 				this.setState({ playedChamp: this.state.championList[i] });
 				this.setState({ stats: this.props.matchData.participants[i].stats });
 			}
@@ -76,7 +76,6 @@ class MatchHistory extends React.Component {
 	render() {
 		return this.state.loaded ? (
 			<Grid id='single-match' centered divided='vertically'>
-				{console.log(this.state.championList)}
 				<Grid.Row id={this.state.stats.win ? 'win-game' : 'lose-game'} centered verticalAlign='middle'>
 					<Grid.Column id='user-item' width={1} />
 					<Grid.Column id='user-item' textAlign='center' width={2}>
@@ -244,8 +243,8 @@ class MatchHistory extends React.Component {
 						);
 					}
 					return (
-						<>
-							<Grid.Row id="score-row" centered verticalAlign='middle' key={index.toString()}>
+						<Fragment key={index.toString()}>
+							<Grid.Row id="score-row" centered verticalAlign='middle'>
 								<Grid.Column id='user-item' width={2} />
 								<Grid.Column textAlign='center' width={2}>
 									<Image
@@ -418,7 +417,7 @@ class MatchHistory extends React.Component {
 								</Grid.Column>
 							</Grid.Row>
 							{emptyRow}
-						</>
+						</Fragment>
 					);
 				})}
 			</Grid>
