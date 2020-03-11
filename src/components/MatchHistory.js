@@ -238,179 +238,187 @@ class MatchHistory extends React.Component {
 				</Grid.Row>
 
 				{this.state.championList.map((champ, index) => {
+					if (index === 4) {
+						var emptyRow = (
+							<Grid.Row />
+						);
+					}
 					return (
-						<Grid.Row id="score-row" centered verticalAlign='middle' key={index.toString()}>
-							<Grid.Column id='user-item' width={2} />
-							<Grid.Column textAlign='center' width={2}>
-								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/champion/${champ}.png`}
-									circular
-									centered
-									verticalAlign='middle'
-									size='mini'
-									as={Link}
-									to={`/champion/${champ}`}
-								/>
-								<br />
-								{this.props.matchData.participantIdentities[index].player.summonerName}
-							</Grid.Column>
+						<>
+							<Grid.Row id="score-row" centered verticalAlign='middle' key={index.toString()}>
+								<Grid.Column id='user-item' width={2} />
+								<Grid.Column textAlign='center' width={2}>
+									<Image
+										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/champion/${champ}.png`}
+										circular
+										centered
+										verticalAlign='middle'
+										size='mini'
+										as={Link}
+										to={`/champion/${champ}`}
+									/>
+									<br />
+									{this.props.matchData.participantIdentities[index].player.summonerName}
+								</Grid.Column>
 
-							<Grid.Column textAlign='center' width={2}>
-								<Header as='h4'>
-									{this.props.matchData.participants[index].stats.kills}
-									{" / "}
-									<span id="deaths">{this.props.matchData.participants[index].stats.deaths}</span>
-									{" / "}
-									{this.props.matchData.participants[index].stats.assists}
-								</Header>
-								KDA
-							</Grid.Column>
+								<Grid.Column textAlign='center' width={2}>
+									<Header as='h4'>
+										{this.props.matchData.participants[index].stats.kills}
+										{" / "}
+										<span id="deaths">{this.props.matchData.participants[index].stats.deaths}</span>
+										{" / "}
+										{this.props.matchData.participants[index].stats.assists}
+									</Header>
+									KDA
+								</Grid.Column>
 
-							<Grid.Column width={1} />
+								<Grid.Column width={1} />
 
-							<Grid.Column textAlign='center' width={6}>
-								{this.props.matchData.participants[index].stats.item0 !== 0 ? (
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item0}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
+								<Grid.Column textAlign='center' width={6}>
+									{this.props.matchData.participants[index].stats.item0 !== 0 ? (
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item0}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
 
-								{this.props.matchData.participants[index].stats.item1 !== 0 ? (
+									{this.props.matchData.participants[index].stats.item1 !== 0 ? (
 
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item1}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item1}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
 
-								{this.props.matchData.participants[index].stats.item2 !== 0 ? (
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item2}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
+									{this.props.matchData.participants[index].stats.item2 !== 0 ? (
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item2}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
 
-								{this.props.matchData.participants[index].stats.item3 !== 0 ? (
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item3}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
+									{this.props.matchData.participants[index].stats.item3 !== 0 ? (
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item3}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
 
-								{this.props.matchData.participants[index].stats.item4 !== 0 ? (
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item4}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
+									{this.props.matchData.participants[index].stats.item4 !== 0 ? (
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item4}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
 
-								{this.props.matchData.participants[index].stats.item5 !== 0 ? (
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item5}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
+									{this.props.matchData.participants[index].stats.item5 !== 0 ? (
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item5}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
 
-								{this.props.matchData.participants[index].stats.item6 !== 0 ? (
-									<Image
-										id='item-img'
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item6}.png`}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								) : (
-									<Image
-										id='item-img'
-										src={process.env.PUBLIC_URL + '/blankitem.png'}
-										rounded
-										floated='left'
-										centered
-										size='mini'
-									/>
-								)}
-							</Grid.Column>
-						</Grid.Row>
+									{this.props.matchData.participants[index].stats.item6 !== 0 ? (
+										<Image
+											id='item-img'
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.props.matchData.participants[index].stats.item6}.png`}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									) : (
+										<Image
+											id='item-img'
+											src={process.env.PUBLIC_URL + '/blankitem.png'}
+											rounded
+											floated='left'
+											centered
+											size='mini'
+										/>
+									)}
+								</Grid.Column>
+							</Grid.Row>
+							{emptyRow}
+						</>
 					);
 				})}
 			</Grid>
