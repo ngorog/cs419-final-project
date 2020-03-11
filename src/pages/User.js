@@ -1,6 +1,7 @@
 import React from "react";
+import { Grid, Loader, Dimmer, Header, Image, Card, Sticky } from "semantic-ui-react";
+
 import Rank from "../components/Rank.js";
-import { Grid, Loader, Dimmer, Header, Image, Card } from "semantic-ui-react";
 import MostPlayed from "../components/MostPlayed";
 import MatchHistory from "../components/MatchHistory";
 
@@ -120,24 +121,26 @@ class User extends React.Component {
 						<Grid.Row>
 							<Grid.Column width='1'></Grid.Column>
 							<Grid.Column width='2'>
-								<Card>
-									<Image
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
-										wrapped
-										ui={false}
-									/>
-									<Card.Content>
-										<Card.Header>{this.state.userInfo.name}</Card.Header>
-										<Card.Meta>
-											<span className='date'>
-												Level {this.state.userInfo.summonerLevel}
-											</span>
-										</Card.Meta>
-									</Card.Content>
-									<Card.Content extra>
-										<Rank rankData={this.state.rankData} />
-									</Card.Content>
-								</Card>
+								<Sticky offset={20} bottomOffset={20}>
+									<Card>
+										<Image
+											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
+											wrapped
+											ui={false}
+										/>
+										<Card.Content>
+											<Card.Header>{this.state.userInfo.name}</Card.Header>
+											<Card.Meta>
+												<span className='date'>
+													Level {this.state.userInfo.summonerLevel}
+												</span>
+											</Card.Meta>
+										</Card.Content>
+										<Card.Content extra>
+											<Rank rankData={this.state.rankData} />
+										</Card.Content>
+									</Card>
+								</Sticky>
 							</Grid.Column>
 							<Grid.Column width='10'>
 								<br />
