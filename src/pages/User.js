@@ -117,7 +117,6 @@ class User extends React.Component {
 			<div>
 				{this.state.status === 200 ? (
 					<Grid>
-						{console.log(this.state.matchData)}
 						<Grid.Row>
 							<Grid.Column width='1'></Grid.Column>
 							<Grid.Column width='2'>
@@ -141,9 +140,6 @@ class User extends React.Component {
 								</Card>
 							</Grid.Column>
 							<Grid.Column width='10'>
-								<Header as='h1' textAlign='center'>
-									Match History
-								</Header>
 								<br />
 								<div>
 									{this.state.matchData.map((data, index) => {
