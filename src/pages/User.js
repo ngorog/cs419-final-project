@@ -2,6 +2,7 @@ import React from "react";
 import Rank from "../components/Rank.js";
 import { Grid, Loader, Dimmer, Header, Image, Card } from "semantic-ui-react";
 import MostPlayed from "../components/MostPlayed";
+import MatchHistory from "../components/MatchHistory";
 
 class User extends React.Component {
 	state = { matchData: [], loaded: false };
@@ -49,7 +50,7 @@ class User extends React.Component {
 
 	componentDidMount() {
 		//	let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
-		let api_key = "RGAPI-6be68049-6ef5-494d-9661-6e794aea7415";
+		let api_key = "RGAPI-0e9c0eda-5144-40fa-a97f-847795d00c2c";
 		let username = this.props.match.params.user;
 
 		this.doCORSRequest(
@@ -105,17 +106,18 @@ class User extends React.Component {
 			});
 	}
 
-	parseRank = rank => {
-		let newRank = rank.toLowerCase();
-		newRank = newRank[0].toUpperCase() + newRank.slice(1);
-		return newRank;
-	};
+	// parseRank = rank => {
+	// 	let newRank = rank.toLowerCase();
+	// 	newRank = newRank[0].toUpperCase() + newRank.slice(1);
+	// 	return newRank;
+	// };
 
 	render() {
 		return this.state.loaded ? (
 			<div>
 				{this.state.status === 200 ? (
 					<Grid>
+						{console.log(this.state.matchData)}
 						<Grid.Row>
 							<Grid.Column width='1'></Grid.Column>
 							<Grid.Column width='2'>
@@ -142,6 +144,17 @@ class User extends React.Component {
 								<Header as='h1' textAlign='center'>
 									Match History
 								</Header>
+								<Grid celled>
+									{(this.state.matchData).map((data, index) => {
+										return (
+											<MatchHistory
+												userName={this.state.userInfo.name}
+												matchHistoryData={this.state.matchHistoryData.matches[index]}
+												matchData={data}
+											/>
+										);
+									})}
+								</Grid>
 							</Grid.Column>
 						</Grid.Row>
 						<MostPlayed mostPlayed={this.state.mostPlayed} />
