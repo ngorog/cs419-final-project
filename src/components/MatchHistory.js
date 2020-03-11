@@ -13,7 +13,8 @@ class MatchHistory extends React.Component {
 					championList: res
 				});
 			})
-			.then(() => this.getUserData());
+			.then(() => this.getUserData())
+			.then(() => this.setState({ loaded: true }));
 		// this.getTime();
 	}
 
