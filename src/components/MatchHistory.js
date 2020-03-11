@@ -55,18 +55,6 @@ class MatchHistory extends React.Component {
 				console.log("Name: ", i, this.state.championList[i]);
 				this.setState({ playedChamp: this.state.championList[i] });
 				this.setState({ stats: this.props.matchData.participants[i].stats });
-
-				// this.setState({ didWin: data.participants[i].stats.win });
-				// this.setState({ kills: data.participants[i].stats.kills });
-				// this.setState({ deaths: data.participants[i].stats.deaths });
-				// this.setState({ assists: data.participants[i].stats.assists });
-				// this.setState({ item0: data.participants[i].stats.item0 });
-				// this.setState({ item1: data.participants[i].stats.item1 });
-				// this.setState({ item2: data.participants[i].stats.item2 });
-				// this.setState({ item3: data.participants[i].stats.item3 });
-				// this.setState({ item4: data.participants[i].stats.item4 });
-				// this.setState({ item5: data.participants[i].stats.item5 });
-				// this.setState({ item6: data.participants[i].stats.item6 });
 			}
 		}
 	}
@@ -103,7 +91,7 @@ class MatchHistory extends React.Component {
 					{this.state.time}
 					<br />
 					<hr />
-					{/*this.state.stats.win ? "Victory" : "Defeat"*/}
+					{this.state.stats.win ? "Victory" : "Defeat"}
 				</Grid.Column>
 				<Grid.Column textAlign='center'>
 					<Image
@@ -126,15 +114,15 @@ class MatchHistory extends React.Component {
 				<Grid.Column textAlign='center'>
 					<Grid.Column>
 						<Grid.Row>
-							{this.state.stats.item0 !== 0 ? (
+							{this.state.stats.item0 ? (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item0}.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item0}.png`}
 									wrapped
 									ui={false}
 								/>
 							) : (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 									wrapped
 									hidden
 									ui={false}
@@ -142,13 +130,13 @@ class MatchHistory extends React.Component {
 							)}{" "}
 							{this.state.stats.item1 !== 0 ? (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item1}.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item1}.png`}
 									wrapped
 									ui={false}
 								/>
 							) : (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 									wrapped
 									hidden
 									ui={false}
@@ -156,13 +144,13 @@ class MatchHistory extends React.Component {
 							)}{" "}
 							{this.state.stats.item2 !== 0 ? (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item2}.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item2}.png`}
 									wrapped
 									ui={false}
 								/>
 							) : (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 									wrapped
 									hidden
 									ui={false}
@@ -173,13 +161,13 @@ class MatchHistory extends React.Component {
 						<Grid.Row>
 							{this.state.stats.item3 !== 0 ? (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item3}.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item3}.png`}
 									wrapped
 									ui={false}
 								/>
 							) : (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 									wrapped
 									hidden
 									ui={false}
@@ -187,13 +175,13 @@ class MatchHistory extends React.Component {
 							)}{" "}
 							{this.state.stats.item4 !== 0 ? (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item4}.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item4}.png`}
 									wrapped
 									ui={false}
 								/>
 							) : (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 									wrapped
 									hidden
 									ui={false}
@@ -201,13 +189,13 @@ class MatchHistory extends React.Component {
 							)}{" "}
 							{this.state.stats.item5 !== 0 ? (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item5}.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item5}.png`}
 									wrapped
 									ui={false}
 								/>
 							) : (
 								<Image
-									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+									src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 									wrapped
 									hidden
 									ui={false}
@@ -218,13 +206,13 @@ class MatchHistory extends React.Component {
 					<Grid.Column>
 						{this.state.stats.item6 !== 0 ? (
 							<Image
-								src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item6}.jpg`}
+								src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/${this.state.stats.item6}.png`}
 								wrapped
 								ui={false}
 							/>
 						) : (
 							<Image
-								src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.jpg`}
+								src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/item/1001.png`}
 								wrapped
 								hidden
 								ui={false}
