@@ -1,0 +1,58 @@
+#single-match {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: lightgray;
+}
+
+#user-item {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#win-game {
+  background-color: #a3cfec;
+  border-style: solid;
+  border-radius: 5px;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-width: 1px;
+  border-color: #99b9cf;
+}
+
+#lose-game {
+  background-color: #e2b6b3;
+  border-style: solid;
+  border-radius: 5px;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-width: 1px;
+  border-color: #cea7a7;
+}
+
+#win-text {
+  color: #1a78ae;
+}
+
+#lose-text {
+  color: #c6443e;
+}
+
+#divider {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+#deaths {
+   color:#c6443e;
+}
+
+#item-img {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#score-row {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}

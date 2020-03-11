@@ -50,7 +50,7 @@ class User extends React.Component {
 
 	componentDidMount() {
 		//let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
-		let api_key = "RGAPI-0e9c0eda-5144-40fa-a97f-847795d00c2c";
+		let api_key = "RGAPI-d19a37b5-ee70-4920-83fb-79f7f9222da3";
 		let username = this.props.match.params.user;
 
 		this.doCORSRequest(
@@ -144,7 +144,8 @@ class User extends React.Component {
 								<Header as='h1' textAlign='center'>
 									Match History
 								</Header>
-								<Grid celled>
+								<br />
+								<div>
 									{this.state.matchData.map((data, index) => {
 										return (
 											<MatchHistory
@@ -153,10 +154,11 @@ class User extends React.Component {
 													this.state.matchHistoryData.matches[index]
 												}
 												matchData={data}
+												key={index.toString()}
 											/>
 										);
 									})}
-								</Grid>
+								</div>
 							</Grid.Column>
 						</Grid.Row>
 						<MostPlayed mostPlayed={this.state.mostPlayed} />
