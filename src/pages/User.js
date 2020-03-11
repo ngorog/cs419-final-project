@@ -49,7 +49,7 @@ class User extends React.Component {
 	};
 
 	componentDidMount() {
-		//	let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
+		//let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
 		let api_key = "RGAPI-0e9c0eda-5144-40fa-a97f-847795d00c2c";
 		let username = this.props.match.params.user;
 
@@ -145,11 +145,13 @@ class User extends React.Component {
 									Match History
 								</Header>
 								<Grid celled>
-									{(this.state.matchData).map((data, index) => {
+									{this.state.matchData.map((data, index) => {
 										return (
 											<MatchHistory
 												userName={this.state.userInfo.name}
-												matchHistoryData={this.state.matchHistoryData.matches[index]}
+												matchHistoryData={
+													this.state.matchHistoryData.matches[index]
+												}
 												matchData={data}
 											/>
 										);
