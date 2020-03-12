@@ -35,6 +35,11 @@ class User extends React.Component {
 		});
 	};
 
+	onUserClick = user => {
+		this.props.history.push(`/search/${user}`); // or whatever string path
+		window.location.reload();
+	};
+
 	setUserInfo = result => {
 		this.setState({ userInfo: result });
 	};
@@ -60,9 +65,9 @@ class User extends React.Component {
 
 	componentDidMount() {
 		//let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
-		let api_key = "RGAPI-9782e280-0a78-4636-894a-f4da5d4be1c6";
+		let api_key = "RGAPI-b8bae817-b417-489f-aab6-7a96d743d3cf";
 		let username = this.props.match.params.user;
-
+		this.setState({ username: this.props.match.params.user });
 		this.doCORSRequest(
 			{
 				method: "GET",
@@ -154,6 +159,7 @@ class User extends React.Component {
 										{this.state.matchData.map((data, index) => {
 											return (
 												<MatchHistory
+													userClick={this.onUserClick}
 													userName={this.state.userInfo.name}
 													matchHistoryData={
 														this.state.matchHistoryData.matches[index]

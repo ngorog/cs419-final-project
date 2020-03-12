@@ -99,15 +99,21 @@ class MatchHistory extends React.Component {
 							to={`/champion/${champ}`}
 						/>
 						<br />
-						<p
-							as={Link}
-							to={`/search/${this.props.matchData.participantIdentities[index].player.summonerName}`}
+						<Header
+							as='h4'
+							textAlign='center'
+							onClick={() =>
+								this.props.userClick(
+									this.props.matchData.participantIdentities[index].player
+										.summonerName
+								)
+							}
 						>
 							{
 								this.props.matchData.participantIdentities[index].player
 									.summonerName
 							}
-						</p>
+						</Header>
 					</Grid.Column>
 
 					<Grid.Column textAlign='center' width='3'>
