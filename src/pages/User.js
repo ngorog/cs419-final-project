@@ -1,5 +1,14 @@
-import React from "react";
-import { Grid, Loader, Dimmer, Header, Image, Card, Sticky } from "semantic-ui-react";
+import React, { createRef } from "react";
+import {
+	Grid,
+	Loader,
+	Dimmer,
+	Header,
+	Image,
+	Card,
+	Sticky,
+	Ref
+} from "semantic-ui-react";
 
 import Rank from "../components/Rank.js";
 import MostPlayed from "../components/MostPlayed";
@@ -51,7 +60,7 @@ class User extends React.Component {
 
 	componentDidMount() {
 		//let api_key = "RGAPI-9efcf01d-384f-4be3-9c11-b44dac605247";
-		let api_key = "RGAPI-d19a37b5-ee70-4920-83fb-79f7f9222da3";
+		let api_key = "RGAPI-9782e280-0a78-4636-894a-f4da5d4be1c6";
 		let username = this.props.match.params.user;
 
 		this.doCORSRequest(
@@ -95,7 +104,7 @@ class User extends React.Component {
 			)
 			.then(() => {
 				var i;
-				for (i = 0; i < 1; i++) {
+				for (i = 0; i < 10; i++) {
 					this.doCORSRequest(
 						{
 							method: "GET",
@@ -107,61 +116,59 @@ class User extends React.Component {
 			});
 	}
 
-	// parseRank = rank => {
-	// 	let newRank = rank.toLowerCase();
-	// 	newRank = newRank[0].toUpperCase() + newRank.slice(1);
-	// 	return newRank;
-	// };
+	contextRef = createRef();
 
 	render() {
 		return this.state.loaded ? (
 			<div>
 				{this.state.status === 200 ? (
-					<Grid>
-						<Grid.Row>
-							<Grid.Column width='1'></Grid.Column>
-							<Grid.Column width='2'>
-								<Sticky offset={20} bottomOffset={20}>
-									<Card>
-										<Image
-											src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
-											wrapped
-											ui={false}
-										/>
-										<Card.Content>
-											<Card.Header>{this.state.userInfo.name}</Card.Header>
-											<Card.Meta>
-												<span className='date'>
-													Level {this.state.userInfo.summonerLevel}
-												</span>
-											</Card.Meta>
-										</Card.Content>
-										<Card.Content extra>
-											<Rank rankData={this.state.rankData} />
-										</Card.Content>
-									</Card>
-								</Sticky>
-							</Grid.Column>
-							<Grid.Column width='10'>
-								<br />
-								<div>
-									{this.state.matchData.map((data, index) => {
-										return (
-											<MatchHistory
-												userName={this.state.userInfo.name}
-												matchHistoryData={
-													this.state.matchHistoryData.matches[index]
-												}
-												matchData={data}
-												key={index.toString()}
+					<Ref innerRef={this.contextRef}>
+						<Grid>
+							<Grid.Row>
+								<Grid.Column width='1'></Grid.Column>
+								<Grid.Column width='2'>
+									<Sticky context={this.contextRef} offset={25}>
+										<Card>
+											<Image
+												src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/profileicon/${this.state.userInfo.profileIconId}.png`}
+												wrapped
+												ui={false}
 											/>
-										);
-									})}
-								</div>
-							</Grid.Column>
-						</Grid.Row>
-						<MostPlayed mostPlayed={this.state.mostPlayed} />
-					</Grid>
+											<Card.Content>
+												<Card.Header>{this.state.userInfo.name}</Card.Header>
+												<Card.Meta>
+													<span className='date'>
+														Level {this.state.userInfo.summonerLevel}
+													</span>
+												</Card.Meta>
+											</Card.Content>
+											<Card.Content extra>
+												<Rank rankData={this.state.rankData} />
+											</Card.Content>
+										</Card>
+									</Sticky>
+								</Grid.Column>
+								<Grid.Column width='10'>
+									<br />
+									<div>
+										{this.state.matchData.map((data, index) => {
+											return (
+												<MatchHistory
+													userName={this.state.userInfo.name}
+													matchHistoryData={
+														this.state.matchHistoryData.matches[index]
+													}
+													matchData={data}
+													key={index.toString()}
+												/>
+											);
+										})}
+									</div>
+								</Grid.Column>
+							</Grid.Row>
+							<MostPlayed mostPlayed={this.state.mostPlayed} />
+						</Grid>
+					</Ref>
 				) : (
 					<Grid centered>
 						<Header as='h1' textAlign='center'>

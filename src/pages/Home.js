@@ -27,6 +27,17 @@ class Home extends React.Component {
 				<Grid.Column width='12'>
 					<SearchBar onSubmit={this.onSearchSubmit} />
 				</Grid.Column>
+				<Grid.Row>
+					<Grid.Column width='8'>
+						<Grid>
+							<Grid.Row>
+								<Grid.Column width='4'>Test</Grid.Column>
+								<Grid.Column width='4'>Test</Grid.Column>
+							</Grid.Row>
+						</Grid>
+					</Grid.Column>
+					<Grid.Column width='8'>Test</Grid.Column>
+				</Grid.Row>
 			</Grid>
 		);
 	}

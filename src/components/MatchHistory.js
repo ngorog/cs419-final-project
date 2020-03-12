@@ -82,6 +82,71 @@ class MatchHistory extends React.Component {
 		this.setState({ day: day, time: time });
 	}
 
+	getTeams() {
+		let arr = [];
+
+		this.state.championList.map((champ, index) => {
+			arr.push(
+				<Grid.Row>
+					<Grid.Column textAlign='center' width='3'>
+						<Image
+							src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/champion/${champ}.png`}
+							circular
+							centered
+							verticalAlign='middle'
+							size='mini'
+							as={Link}
+							to={`/champion/${champ}`}
+						/>
+						<br />
+						<p
+							as={Link}
+							to={`/search/${this.props.matchData.participantIdentities[index].player.summonerName}`}
+						>
+							{
+								this.props.matchData.participantIdentities[index].player
+									.summonerName
+							}
+						</p>
+					</Grid.Column>
+
+					<Grid.Column textAlign='center' width='3'>
+						<Header as='h4'>
+							{this.props.matchData.participants[index].stats.kills}
+							{" / "}
+							<span id='deaths'>
+								{this.props.matchData.participants[index].stats.deaths}
+							</span>
+							{" / "}
+							{this.props.matchData.participants[index].stats.assists}
+						</Header>
+						KDA
+					</Grid.Column>
+
+					<Grid.Column width={1} />
+
+					<ItemBar
+						stats={this.props.matchData.participants[index].stats}
+						size='mini'
+					/>
+				</Grid.Row>
+			);
+		});
+		let team1 = arr.slice(0, 5);
+		let team2 = arr.slice(5);
+		const jsx = (
+			<Fragment>
+				<Grid.Column width={8}>
+					<Grid>{team1}</Grid>
+				</Grid.Column>
+				<Grid.Column width={8}>
+					<Grid>{team2}</Grid>
+				</Grid.Column>
+			</Fragment>
+		);
+		return jsx;
+	}
+
 	render() {
 		return this.state.loaded ? (
 			<Grid id='single-match' centered divided='vertically'>
@@ -130,56 +195,9 @@ class MatchHistory extends React.Component {
 					<Grid.Column id='user-item' width={1} />
 					<ItemBar stats={this.state.stats} />
 				</Grid.Row>
-
-				{this.state.championList.map((champ, index) => {
-					if (index === 4) {
-						var emptyRow = <Grid.Row />;
-					}
-					return (
-						<Fragment key={index.toString()}>
-							<Grid.Row id='score-row' centered verticalAlign='middle'>
-								<Grid.Column id='user-item' width={2} />
-								<Grid.Column textAlign='center' width={2}>
-									<Image
-										src={`http://ddragon.leagueoflegends.com/cdn/10.5.1/img/champion/${champ}.png`}
-										circular
-										centered
-										verticalAlign='middle'
-										size='mini'
-										as={Link}
-										to={`/champion/${champ}`}
-									/>
-									<br />
-									{
-										this.props.matchData.participantIdentities[index].player
-											.summonerName
-									}
-								</Grid.Column>
-
-								<Grid.Column textAlign='center' width={2}>
-									<Header as='h4'>
-										{this.props.matchData.participants[index].stats.kills}
-										{" / "}
-										<span id='deaths'>
-											{this.props.matchData.participants[index].stats.deaths}
-										</span>
-										{" / "}
-										{this.props.matchData.participants[index].stats.assists}
-									</Header>
-									KDA
-								</Grid.Column>
-
-								<Grid.Column width={1} />
-
-								<ItemBar
-									stats={this.props.matchData.participants[index].stats}
-									size='mini'
-								/>
-							</Grid.Row>
-							{emptyRow}
-						</Fragment>
-					);
-				})}
+				<Grid.Row id='score-row' centered verticalAlign='middle'>
+					{this.getTeams()}
+				</Grid.Row>
 			</Grid>
 		) : (
 			<Dimmer active>
