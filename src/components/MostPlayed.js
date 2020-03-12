@@ -64,7 +64,7 @@ class MostPlayed extends React.Component {
 					<Header as='h1' textAlign='center'>
 						Most Played Champions
 					</Header>
-					<Card.Group verticalAlign='middle' centered>
+					<Card.Group centered>
 						{Object.keys(this.state.championList).map((key, index) => {
 							const champion = this.state.championList[key];
 							return (
@@ -72,6 +72,7 @@ class MostPlayed extends React.Component {
 									img={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`}
 									name={champion.name}
 									desc={"Mastery Points: " + champion.points}
+									key={index.toString()}
 								/>
 							);
 						})}
