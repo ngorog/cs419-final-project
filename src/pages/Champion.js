@@ -13,6 +13,11 @@ import {
   GridColumn
 } from "semantic-ui-react";
 import ItemData from "../data/itemData";
+import ChampionArt from "../components/ChampionArt";
+import ChampionLore from "../components/ChampionLore";
+import ChampionItems from "../components/ChampionItems";
+import ChampionStats from "../components/ChampionStats";
+import ChampionSkills from "../components/ChampionSkills";
 
 class Champion extends React.Component {
   state = {
@@ -29,9 +34,7 @@ class Champion extends React.Component {
         var champions = res.data.data;
         this.setState({ champions });
         console.log(this.state.champions);
-
         const { id } = this.props.match.params;
-
         const champInfo = {
           name: champions[id].id,
           title: champions[id].title,
@@ -76,149 +79,58 @@ class Champion extends React.Component {
         <Grid>
           <Grid.Row>
             <Grid.Column width="1"></Grid.Column>
-            <Grid.Column width="2">
-              <Card>
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/${this.state.champInfo.name}.png`}
-                  wrapped
-                  ui={false}
-                />
-                <Card.Content>
-                  <Card.Header>{this.state.champInfo.name}</Card.Header>
-                  <Card.Meta>{this.state.champInfo.title}</Card.Meta>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="4" verticalAlign="middle">
-              <Card>
-                <Card.Content>
-                  <Card.Header>Lore:</Card.Header>
-                </Card.Content>
-
-                <Card.Content extra>{this.state.champInfo.lore}</Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="3" verticalAlign="middle">
-              <Card>
-                <Card.Content>
-                  <Header as="h3">Recommended Items: </Header>
-                </Card.Content>
-                <Card.Content extra>
-                  <Image
-                    spaced="right"
-                    src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/${this.state.champInfo.item1}.png`}
-                    wrapped
-                  />
-
-                  <Image
-                    spaced="right"
-                    src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/${this.state.champInfo.item2}.png`}
-                    wrapped
-                  />
-                  <Image
-                    spaced="right"
-                    src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/${this.state.champInfo.item3}.png`}
-                    wrapped
-                  />
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="3" verticalAlign="middle">
-              <Card>
-                <Card.Content>
-                  <Card.Header>Attack:</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.stat1}</Card.Content>
-
-                <Card.Content>
-                  <Card.Header>Defense:</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.stat2}</Card.Content>
-                <Card.Content>
-                  <Card.Header>Magic:</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.stat3}</Card.Content>
-                <Card.Content>
-                  <Card.Header>Difficulty:</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.stat4}</Card.Content>
-              </Card>
-            </Grid.Column>
+            <ChampionArt
+              img={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/${this.state.champInfo.name}.png`}
+              name={this.state.champInfo.name}
+              title={this.state.champInfo.title}
+            />
+            <ChampionLore desc={this.state.champInfo.lore} />
+            <ChampionItems
+              item1={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/${this.state.champInfo.item1}.png`}
+              item2={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/${this.state.champInfo.item2}.png`}
+              item3={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/${this.state.champInfo.item3}.png`}
+            />
+            <ChampionStats
+              stat1={this.state.champInfo.stat1}
+              stat2={this.state.champInfo.stat2}
+              stat3={this.state.champInfo.stat3}
+              stat4={this.state.champInfo.stat4}
+            />
           </Grid.Row>
         </Grid>
 
         <Grid>
-          <Grid.Column width="1">
-            <ul>
-              <Header as="h3">Abilities: </Header>
-            </ul>
+          <Grid.Column width="1"></Grid.Column>
+          <Grid.Column width="2">
+            <Header as="h3">Abilities: </Header>
           </Grid.Column>
           <Grid.Row>
             <Grid.Column width="1"></Grid.Column>
-            <Grid.Column width="2">
-              <Card>
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/passive/${this.state.champInfo.passiveImg}`}
-                  wrapped
-                  ui={false}
-                />
-                <Card.Content>
-                  <Card.Header>{this.state.champInfo.passiveName}</Card.Header>
-                </Card.Content>
-                <Card.Content extra>
-                  {this.state.champInfo.passiveDesc}
-                </Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="2" textAlign="left">
-              <Card>
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.qImg}`}
-                  wrapped
-                  ui={false}
-                />
-                <Card.Content>
-                  <Card.Header>{this.state.champInfo.qName}</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.qDesc}</Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="2">
-              <Card>
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.wImg}`}
-                  wrapped
-                />
-                <Card.Content>
-                  <Card.Header>{this.state.champInfo.wName}</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.wDesc}</Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="2">
-              <Card>
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.eImg}`}
-                  wrapped
-                />
-                <Card.Content>
-                  <Card.Header>{this.state.champInfo.eName}</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.eDesc}</Card.Content>
-              </Card>
-            </Grid.Column>
-            <Grid.Column width="2">
-              <Card>
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.rImg}`}
-                  wrapped
-                />
-                <Card.Content>
-                  <Card.Header>{this.state.champInfo.rName}</Card.Header>
-                </Card.Content>
-                <Card.Content extra>{this.state.champInfo.rDesc}</Card.Content>
-              </Card>
-            </Grid.Column>
+            <ChampionSkills
+              skillImg={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/passive/${this.state.champInfo.passiveImg}`}
+              skillName={this.state.champInfo.passiveName}
+              skillDesc={this.state.champInfo.passiveDesc}
+            />
+            <ChampionSkills
+              skillImg={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.qImg}`}
+              skillName={this.state.champInfo.qName}
+              skillDesc={this.state.champInfo.qDesc}
+            />
+            <ChampionSkills
+              skillImg={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.wImg}`}
+              skillName={this.state.champInfo.wName}
+              skillDesc={this.state.champInfo.wDesc}
+            />
+            <ChampionSkills
+              skillImg={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.eImg}`}
+              skillName={this.state.champInfo.eName}
+              skillDesc={this.state.champInfo.eDesc}
+            />
+            <ChampionSkills
+              skillImg={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/${this.state.champInfo.rImg}`}
+              skillName={this.state.champInfo.rName}
+              skillDesc={this.state.champInfo.rDesc}
+            />
           </Grid.Row>
         </Grid>
       </div>
