@@ -7,7 +7,7 @@ import Champion from "../pages/Champion";
 import Home from "../pages/Home";
 import User from "../pages/User";
 import Items from "../pages/Items";
-import Status from "../pages/Status";
+//import Status from "../pages/Status";
 
 class App extends React.Component {
   state = {};
