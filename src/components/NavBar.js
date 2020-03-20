@@ -40,16 +40,6 @@ class NavBar extends React.Component {
         >
           Items
         </Menu.Item>
-
-        <Menu.Item
-          as={Link}
-          to="/status"
-          name="status"
-          active={activeItem === "status"}
-          onClick={this.handleItemClick}
-        >
-          Status
-        </Menu.Item>
       </Menu>
     );
   }
