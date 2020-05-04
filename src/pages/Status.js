@@ -32,7 +32,7 @@ class Status extends React.Component {
 	};
 
 	componentDidMount() {
-		let api_key = "RGAPI-ec3eb8e5-479a-4d79-8c2d-189345c76d14";
+		let api_key = "RGAPI-ba171e45-0f12-4fe6-802a-141cba692fa4";
 		this.doCORSRequest(
 			{
 				method: "GET",
